@@ -6,14 +6,14 @@
 #include <conio.h>
 
 using namespace std;
-/*±äÁ¿ÉùÃ÷*/ 
-int map [4][4];                  //µØÍ¼
-int color [4][4];                //±ê¼Ç£¬ÔÚÂß¼­¿éÓÃ
-int Score;                       //·Ö”µ 
-int count;                       //ÅĞ¶¨GAMEOVERµÄÑ­»·Êı
-int Print ();                    //´òÓ¡½çÃæ
-void Sdir ();                    //Éú³ÉËæ»úÊı
-void Printcover ();               //Éú³É·âÃæ 
+/*å˜é‡å£°æ˜*/ 
+int map [4][4];                  //åœ°å›¾
+int color [4][4];                //æ ‡è®°ï¼Œåœ¨é€»è¾‘å—ç”¨
+int Score;                       //åˆ†æ•¸ 
+int count;                       //åˆ¤å®šGAMEOVERçš„å¾ªç¯æ•°
+int Print ();                    //æ‰“å°ç•Œé¢
+void Sdir ();                    //ç”Ÿæˆéšæœºæ•°
+void Printcover ();               //ç”Ÿæˆå°é¢ 
 void Judgeend ();                 
 void Judgezero ();
 void Printinfo ();
@@ -22,7 +22,7 @@ int T,x1,y1,judgeend,judgezero;
 int Topscore=16;
 char input;
 
-//¼üÅÌ½»»¥
+//é”®ç›˜äº¤äº’
 void up ();
 void down ();
 void left ();
@@ -30,7 +30,7 @@ void right ();
 
 
 int main(){
-	//·âÃæ
+	//å°é¢
 	back2:
 	system("cls");
 	Printcover();
@@ -65,29 +65,29 @@ int main(){
 		}
 		
 	}
-	//ÉÏÃæ¶¼ÊÇ·âÃæ 
+	//ä¸Šé¢éƒ½æ˜¯å°é¢ 
 	
 	system("cls"); 
 		
-	srand(( int ) time ( 0 ) );      //Éú³ÉËæ»úÖÖ×Ó 
+	srand(( int ) time ( 0 ) );      //ç”Ÿæˆéšæœºç§å­ 
 	for(int i = 0; i < 4; i++)
 	for(int j = 0; j < 4; j++)
 	{
 		map[i][j]=0,color[i][j]=0;
 	} 
 	Sdir ();
-	Sdir ();                  //³õÊ¼»¯
+	Sdir ();                  //åˆå§‹åŒ–
 	 
 	do 
-	{ system("cls");         //²âÊÔ°ÑÕâ¾äÇåÆÁ×¢ÊÍµô 
+	{ system("cls");         //æµ‹è¯•æŠŠè¿™å¥æ¸…å±æ³¨é‡Šæ‰ 
 	Print ();
 	T=0;
-	back:                   //ÎŞĞ§ÒÆ¶¯/ÊäÈë´íÎóback
+	back:                   //æ— æ•ˆç§»åŠ¨/è¾“å…¥é”™è¯¯back
     char input=_getch();
     if(input!='W' && input!='S' && input!='A' && input!= 'D')
    {
 		SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), FOREGROUND_INTENSITY | FOREGROUND_GREEN);
-		printf("\t\t\t[WARNING]ÇëÊäÈëÓĞĞ§×Ö·û(¿ªÆô´óĞ´¼üÅÌ)£¡\n"); 
+		printf("\t\t\t[WARNING]è¯·è¾“å…¥æœ‰æ•ˆå­—ç¬¦(å¼€å¯å¤§å†™é”®ç›˜)ï¼\n"); 
 		SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), FOREGROUND_INTENSITY | FOREGROUND_RED |
 		FOREGROUND_GREEN | FOREGROUND_BLUE);
 		goto back;
@@ -102,14 +102,14 @@ else
 		case 'D': right() ;break;
      	} 
      	
-     	if(T!=0)Sdir();////////ÓĞĞ§ÒÆ¶¯£¬½áÊøÅĞ¶Ï¿ò£¬½øÈëend judge 
+     	if(T!=0)Sdir();////////æœ‰æ•ˆç§»åŠ¨ï¼Œç»“æŸåˆ¤æ–­æ¡†ï¼Œè¿›å…¥end judge 
      	else
      	{
      		Judgezero();
      		if(judgezero==0)
      		{   backto:
      			SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), FOREGROUND_INTENSITY | FOREGROUND_RED);
-	        	printf("\t\t\t[ERROR]ÎŞĞ§ÒÆ¶¯£¡\n"); 
+	        	printf("\t\t\t[ERROR]æ— æ•ˆç§»åŠ¨ï¼\n"); 
 	    	    SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), FOREGROUND_INTENSITY | FOREGROUND_RED |
 		        FOREGROUND_GREEN | FOREGROUND_BLUE);
 		    goto back;
@@ -121,29 +121,29 @@ else
 				else
 				{
 			    printf("\t\t\t\t\t YOU LOST!\n");Sleep(1000);
-		 	    printf("\t\t\t\t\t ÊÇ·ñÖØĞÂ¿ªÊ¼£¨ÊÇ Y/ ·ñ N£©");      //ÅĞÊä 
+		 	    printf("\t\t\t\t\t æ˜¯å¦é‡æ–°å¼€å§‹ï¼ˆæ˜¯ Y/ å¦ Nï¼‰");      //åˆ¤è¾“ 
 				 while(1)
 			{   char input=_getch();
 				if(input=='Y')goto back2;
 		        if(input=='N')goto stop;
 			}                   
-		 	    break;               /////////Ìø³öÑ­»·ÅĞÊä 
+		 	    break;               /////////è·³å‡ºå¾ªç¯åˆ¤è¾“ 
 				}
 			}
 		}
 }
 
-for(int i = 0; i < 4; i++)   /////////ÅĞ¶Ï½áÊøÌõ¼ş2 WIN 
+for(int i = 0; i < 4; i++)   /////////åˆ¤æ–­ç»“æŸæ¡ä»¶2 WIN 
 	 for(int j = 0; j < 4 ; j++)
 	 {
 	 	if(map[i][j]==Topscore)Topscore*=2;
 		 
-		 if(map[i][j] == 2048 ) /////////¸ÄÊı×Ö==¸ÄÉÏÏŞ 
+		 if(map[i][j] == 2048 ) /////////æ”¹æ•°å­—==æ”¹ä¸Šé™ 
 		 {
 		 	system("cls");
 	        Print();
 	        printf("\t\t\t\t\t YOU WIN! \n");Sleep(1000);
-	        printf("\t\t\t\t\t ÊÇ·ñÖØĞÂ¿ªÊ¼£¨ÊÇ Y/ ·ñ N£©");
+	        printf("\t\t\t\t\t æ˜¯å¦é‡æ–°å¼€å§‹ï¼ˆæ˜¯ Y/ å¦ Nï¼‰");
 			
 			while(1)
 			{   char input=_getch();
@@ -155,17 +155,17 @@ for(int i = 0; i < 4; i++)   /////////ÅĞ¶Ï½áÊøÌõ¼ş2 WIN
 	 
 	}
 	while(1); 
-    //½áÊø 
+    //ç»“æŸ 
     stop:
 	system("cls");
-	printf("\t\t\t\t\t·âµ×\n");Sleep(1000);
+	printf("\t\t\t\t\tå°åº•\n");Sleep(1000);
 	printf("\n\t\t\t\t\twww.bilibili.com\n\t\t\t\t\tAll Rights Reserved") ;Sleep(1000);
-	printf("\n\n\t\t\t\t\t°´ÈÎÒâ¼ü½áÊøÓÎÏ·\n");getch();
+	printf("\n\n\t\t\t\t\tæŒ‰ä»»æ„é”®ç»“æŸæ¸¸æˆ\n");getch();
 	return 0;
 } 
 
 
-//Éú³ÉÊı×Ö 
+//ç”Ÿæˆæ•°å­— 
 void Sdir()
 {   
 	do {
@@ -175,7 +175,7 @@ void Sdir()
 	if(rand()%2==1)map[x1][y1]=4;
 	else map[x1][y1]=2;
 }
-///////////////////////////////·âÃæ
+///////////////////////////////å°é¢
 void Printcover()
 {
 printf("\n\n\n\n\n");
@@ -195,10 +195,10 @@ printf("\t\t\t2:::::2       2222220:::::::000:::::::0          4::::4  8::::::88
 printf("\t\t\t2::::::2222222:::::2 00:::::::::::::00         44::::::44 88:::::::::::::88 \n") ;
 printf("\t\t\t2::::::::::::::::::2   00:::::::::00           4::::::::4   88:::::::::88   \n") ;
 printf("\t\t\t22222222222222222222     000000000             4444444444     888888888     \n\n\n\n") ;
-printf("\t\t\t\t¿ªÆô´óĞ´¼üÅÌ\n");
+printf("\t\t\t\tå¼€å¯å¤§å†™é”®ç›˜\n");
 SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE),FOREGROUND_INTENSITY |FOREGROUND_RED);
-			printf("\t\t\t\t 1 ¿ªÊ¼ÓÎÏ·       2 ÓÎÏ·ËµÃ÷\n");
-            printf("\t\t\t\t 3 ¿ª·¢ĞÅÏ¢       4 ÍË³öÓÎÏ·\n");
+			printf("\t\t\t\t 1 å¼€å§‹æ¸¸æˆ       2 æ¸¸æˆè¯´æ˜\n");
+            printf("\t\t\t\t 3 å¼€å‘ä¿¡æ¯       4 é€€å‡ºæ¸¸æˆ\n");
 SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE),FOREGROUND_INTENSITY |
             FOREGROUND_RED | FOREGROUND_GREEN | FOREGROUND_BLUE);
 
@@ -238,31 +238,31 @@ SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE),FOREGROUND_INTENSITY |
 	
  }
  
-////////////////////////////////////´òÓ¡ÓÎÏ·½çÃæ
+////////////////////////////////////æ‰“å°æ¸¸æˆç•Œé¢
 int Print()
 { 
 
 	printf("\n\n\n\n");
-	printf("\t\t\tÉÏ£ºW\tÏÂ£ºS\t×ó£ºA\tÓÒ£ºD\n");
-	printf("\t\t\t¨X¨T¨T¨T¨T¨T¨T¨T¨j¨T¨T¨T¨T¨T¨T¨T¨j¨T¨T¨T¨T¨T¨T¨T¨j¨T¨T¨T¨T¨T¨T¨T¨[\n");
-    printf("\t\t\t¨U       ¨U       ¨U       ¨U       ¨U\n");
+	printf("\t\t\tä¸Šï¼šW\tä¸‹ï¼šS\tå·¦ï¼šA\tå³ï¼šD\n");
+	printf("\t\t\tâ•”â•â•â•â•â•â•â•â•¦â•â•â•â•â•â•â•â•¦â•â•â•â•â•â•â•â•¦â•â•â•â•â•â•â•â•—\n");
+    printf("\t\t\tâ•‘       â•‘       â•‘       â•‘       â•‘\n");
     printf("\t\t\t");
     for(int j=0;j<4;j++)
-      {   printf("¨U   %d",map[0][j]);
+      {   printf("â•‘   %d",map[0][j]);
           int q=10;int sec=0;
 	      while((map[0][j]/q)>0)
 	           { q=q*10;sec++;}
 	for(int io=0;io<3-sec;io++)printf(" ");
 	
 }
-printf("¨U\n");
+printf("â•‘\n");
   
-    printf("\t\t\t¨U       ¨U       ¨U       ¨U       ¨U\n");
-    printf("\t\t\t¨d¨T¨T¨T¨T¨T¨T¨T¨p¨T¨T¨T¨T¨T¨T¨T¨p¨T¨T¨T¨T¨T¨T¨T¨p¨T¨T¨T¨T¨T¨T¨T¨g\n");
-    printf("\t\t\t¨U       ¨U       ¨U       ¨U       ¨U\n");
+    printf("\t\t\tâ•‘       â•‘       â•‘       â•‘       â•‘\n");
+    printf("\t\t\tâ• â•â•â•â•â•â•â•â•¬â•â•â•â•â•â•â•â•¬â•â•â•â•â•â•â•â•¬â•â•â•â•â•â•â•â•£\n");
+    printf("\t\t\tâ•‘       â•‘       â•‘       â•‘       â•‘\n");
     printf("\t\t\t");
 	for(int j=0;j<4;j++)
-{   printf("¨U   %d",map[1][j]);
+{   printf("â•‘   %d",map[1][j]);
     int q=10;int sec=0;
 	while((map[1][j]/q)>0)
 	{   q=q*10;
@@ -271,15 +271,15 @@ printf("¨U\n");
 	for(int io=0;io<3-sec;io++)printf(" ");
 	
 }
-printf("¨U\n");
+printf("â•‘\n");
 	
 	
-    printf("\t\t\t¨U       ¨U       ¨U       ¨U       ¨U\n");
-    printf("\t\t\t¨d¨T¨T¨T¨T¨T¨T¨T¨p¨T¨T¨T¨T¨T¨T¨T¨p¨T¨T¨T¨T¨T¨T¨T¨p¨T¨T¨T¨T¨T¨T¨T¨g\n");
-    printf("\t\t\t¨U       ¨U       ¨U       ¨U       ¨U\n");
+    printf("\t\t\tâ•‘       â•‘       â•‘       â•‘       â•‘\n");
+    printf("\t\t\tâ• â•â•â•â•â•â•â•â•¬â•â•â•â•â•â•â•â•¬â•â•â•â•â•â•â•â•¬â•â•â•â•â•â•â•â•£\n");
+    printf("\t\t\tâ•‘       â•‘       â•‘       â•‘       â•‘\n");
      printf("\t\t\t");
    for(int j=0;j<4;j++)
-{   printf("¨U   %d",map[2][j]);
+{   printf("â•‘   %d",map[2][j]);
     int q=10;int sec=0;
 	while((map[2][j]/q)>0)
 	{   q=q*10;
@@ -288,13 +288,13 @@ printf("¨U\n");
 	for(int io=0;io<3-sec;io++)printf(" ");
 	
 }
-    printf("¨U\n");
-    printf("\t\t\t¨U       ¨U       ¨U       ¨U       ¨U\n");
-    printf("\t\t\t¨d¨T¨T¨T¨T¨T¨T¨T¨p¨T¨T¨T¨T¨T¨T¨T¨p¨T¨T¨T¨T¨T¨T¨T¨p¨T¨T¨T¨T¨T¨T¨T¨g\n");
-    printf("\t\t\t¨U       ¨U       ¨U       ¨U       ¨U\n");
+    printf("â•‘\n");
+    printf("\t\t\tâ•‘       â•‘       â•‘       â•‘       â•‘\n");
+    printf("\t\t\tâ• â•â•â•â•â•â•â•â•¬â•â•â•â•â•â•â•â•¬â•â•â•â•â•â•â•â•¬â•â•â•â•â•â•â•â•£\n");
+    printf("\t\t\tâ•‘       â•‘       â•‘       â•‘       â•‘\n");
      printf("\t\t\t");
    for(int j=0;j<4;j++)
-{   printf("¨U   %d",map[3][j]);
+{   printf("â•‘   %d",map[3][j]);
     int q=10;int sec=0;
 	while((map[3][j]/q)>0)
 	{   q=q*10;
@@ -302,63 +302,63 @@ printf("¨U\n");
 	}
 	for(int io=0;io<3-sec;io++)printf(" ");
 }
-    printf("¨U\n");
+    printf("â•‘\n");
    
-    printf("\t\t\t¨U       ¨U       ¨U       ¨U       ¨U\n");
-    printf("\t\t\t¨^¨T¨T¨T¨T¨T¨T¨T¨m¨T¨T¨T¨T¨T¨T¨T¨m¨T¨T¨T¨T¨T¨T¨T¨m¨T¨T¨T¨T¨T¨T¨T¨a\n");
-    printf("\n\n\t\t\t ®”Ç°µÃ·Ö  %d\n",Score);
-    printf("\n\n\t\t\t ®”Ç°¶ÎÎ»£º");
+    printf("\t\t\tâ•‘       â•‘       â•‘       â•‘       â•‘\n");
+    printf("\t\t\tâ•šâ•â•â•â•â•â•â•â•©â•â•â•â•â•â•â•â•©â•â•â•â•â•â•â•â•©â•â•â•â•â•â•â•â•\n");
+    printf("\n\n\t\t\t ç•¶å‰å¾—åˆ†  %d\n",Score);
+    printf("\n\n\t\t\t ç•¶å‰æ®µä½ï¼š");
     switch(Topscore)
     {
     	case 16:{
     		SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE),FOREGROUND_INTENSITY |FOREGROUND_GREEN);
-    		cout<<"Ó¢ÓÂÇàÍ­"<<'\n'; 
+    		cout<<"è‹±å‹‡é’é“œ"<<'\n'; 
     		SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE),FOREGROUND_INTENSITY |
             FOREGROUND_RED | FOREGROUND_GREEN | FOREGROUND_BLUE);
 			break;
 		}
 		case 32:{
-			cout<<"²»Çü°×Òø"<<'\n';
+			cout<<"ä¸å±ˆç™½é“¶"<<'\n';
 			break;
 		}
 		case 64:{
 			SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE),FOREGROUND_INTENSITY |FOREGROUND_RED | FOREGROUND_GREEN);
-			cout<<"ÈÙÒ«»Æ½ğ"<<'\n';
+			cout<<"è£è€€é»„é‡‘"<<'\n';
 			SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE),FOREGROUND_INTENSITY |
             FOREGROUND_RED | FOREGROUND_GREEN | FOREGROUND_BLUE);
 			break;
 		}
 		case 128:{
 			SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE),FOREGROUND_INTENSITY |FOREGROUND_BLUE);
-			cout<<"»ª¹ó²¬½ğ"<<'\n';
+			cout<<"åè´µé“‚é‡‘"<<'\n';
 			SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE),FOREGROUND_INTENSITY |
             FOREGROUND_RED | FOREGROUND_GREEN | FOREGROUND_BLUE);
 			break;
 		}
 		case 256:{
 			SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE),FOREGROUND_INTENSITY |FOREGROUND_GREEN | FOREGROUND_BLUE);
-			cout<<"è­è²×êÊ¯"<<'\n';
+			cout<<"ç’€ç’¨é’»çŸ³"<<'\n';
 			SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE),FOREGROUND_INTENSITY |
             FOREGROUND_RED | FOREGROUND_GREEN | FOREGROUND_BLUE);
 			break;
 		}
 		case 512:{
 			SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE),FOREGROUND_INTENSITY |FOREGROUND_RED | FOREGROUND_BLUE);
-			cout<<"²¨²¨´óÊ¦"<<'\n';
+			cout<<"æ³¢æ³¢å¤§å¸ˆ"<<'\n';
 			SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE),FOREGROUND_INTENSITY |
             FOREGROUND_RED | FOREGROUND_GREEN | FOREGROUND_BLUE);
 			break;
 		}
 		case 1024:{
 			SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE),FOREGROUND_INTENSITY |FOREGROUND_GREEN);
-			cout<<"½Ü³ö´óÊ¦"<<'\n';
+			cout<<"æ°å‡ºå¤§å¸ˆ"<<'\n';
 			SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE),FOREGROUND_INTENSITY |
             FOREGROUND_RED | FOREGROUND_GREEN | FOREGROUND_BLUE);
 			break;
 		}
 		case 2048:{
 			SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE),FOREGROUND_INTENSITY |FOREGROUND_RED);
-			cout<<"×îÇ¿ÍõÕß"<<'\n';
+			cout<<"æœ€å¼ºç‹è€…"<<'\n';
 			SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE),FOREGROUND_INTENSITY |
             FOREGROUND_RED | FOREGROUND_GREEN | FOREGROUND_BLUE);
 			break;
@@ -368,21 +368,16 @@ printf("¨U\n");
 } 
 void Printinfo()
 {
-	
-	printf("\n\n\n\n\n");
-	printf("\n\n\t\t\t\t\t ËÄ´¨´óÑ§2019¼¶»ªÎ÷»ù´¡Ò½Ñ§Óë·¨Ò½Ñ§Ôº\n");
-	printf("\n\n\t\t\t\t\t »ù´¡Ò½Ñ§ Ğ¤XX\n");
-	printf("\n\n\t\t\t\t\t ID£º2019151610031\n");
-	printf("\n\n\t\t\t\t\t\t\t\t\t\t 2019.12.19 \n"); 
+	pirntf("\nwrite something\n");
 }
 void Printuse()
 {
-	printf("\n\n\n\n\t\t\t\t 1.Ê¹ÓÃ¼üÅÌ¿ØÖÆÉÏÏÂ×óÓÒ£¬ËùÓĞ¸ñ×Ó»áÏòÄÇ¸ö·½ÏòÔË¶¯¡£ \n");
-	printf("\n\n\n\n\t\t\t\t 2.ÏàÍ¬Êı×ÖµÄÁ½¸ö¸ñ×Ó,Ïà×²Ê±Êı×Ö»áÏà¼Ó¡£ \n");
-	printf("\n\n\n\n\t\t\t\t 3.Ã¿´Î»¬¶¯Ê±,¿Õ°×´¦»áËæ»úË¢ĞÂ³öÒ»¸öÊı×ÖµÄ¸ñ×Ó¡£ \n");
-	printf("\n\n\n\n\t\t\t\t 4.µ±½çÃæ²»¿ÉÔË¶¯Ê±(µ±½çÃæÈ«²¿±»Êı×ÖÌîÂúÊ±),ÓÎÏ·½áÊø;µ±½çÃæÖĞ×î´óÊı×ÖÊÇ2048Ê±,ÓÎÏ·Ê¤Àû¡£ \n");
+	printf("\n\n\n\n\t\t\t\t 1.ä½¿ç”¨é”®ç›˜æ§åˆ¶ä¸Šä¸‹å·¦å³ï¼Œæ‰€æœ‰æ ¼å­ä¼šå‘é‚£ä¸ªæ–¹å‘è¿åŠ¨ã€‚ \n");
+	printf("\n\n\n\n\t\t\t\t 2.ç›¸åŒæ•°å­—çš„ä¸¤ä¸ªæ ¼å­,ç›¸æ’æ—¶æ•°å­—ä¼šç›¸åŠ ã€‚ \n");
+	printf("\n\n\n\n\t\t\t\t 3.æ¯æ¬¡æ»‘åŠ¨æ—¶,ç©ºç™½å¤„ä¼šéšæœºåˆ·æ–°å‡ºä¸€ä¸ªæ•°å­—çš„æ ¼å­ã€‚ \n");
+	printf("\n\n\n\n\t\t\t\t 4.å½“ç•Œé¢ä¸å¯è¿åŠ¨æ—¶(å½“ç•Œé¢å…¨éƒ¨è¢«æ•°å­—å¡«æ»¡æ—¶),æ¸¸æˆç»“æŸ;å½“ç•Œé¢ä¸­æœ€å¤§æ•°å­—æ˜¯2048æ—¶,æ¸¸æˆèƒœåˆ©ã€‚ \n");
 }
-//////////////////////////////ÉÏÏÂ×óÓÒÂß¼­////////////////// 
+//////////////////////////////ä¸Šä¸‹å·¦å³é€»è¾‘////////////////// 
 void up()
 {
 	for(int i=0;i<4;i++)
